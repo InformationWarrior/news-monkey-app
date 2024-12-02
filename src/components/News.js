@@ -1,7 +1,8 @@
-require('dotenv').config();
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
-const URL = process.env.URL;
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export class News extends Component {
     constructor() {
@@ -18,7 +19,7 @@ export class News extends Component {
 
         }
         else {
-            let url = URL;
+            let url = `${BASE_URL}top-headlines?country=us&apiKey=${API_KEY}&page=${this.state.page}&pageSize=20`;
             let data = await fetch(url);
             let parsedData = await data.json();
             this.setState({
@@ -29,7 +30,7 @@ export class News extends Component {
     }
 
     handlePrevClick = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=5ff6fce93b3442cbba407ba2f99076d9&page=${this.state.page - 1}&pageSize=20`;
+        let url = `${BASE_URL}top-headlines?country=us&apiKey=${API_KEY}&page=${this.state.page - 1}&pageSize=20`;
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({
@@ -39,7 +40,7 @@ export class News extends Component {
     }
 
     handleNextClick = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=5ff6fce93b3442cbba407ba2f99076d9&page=${this.state.page + 1}&pageSize=20`;
+        let url = `${BASE_URL}top-headlines?country=us&apiKey=${API_KEY}&page=${this.state.page + 1}&pageSize=20`;
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({
