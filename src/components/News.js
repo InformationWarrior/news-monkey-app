@@ -1,5 +1,7 @@
+require('dotenv').config();
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
+const URL = process.env.URL;
 
 export class News extends Component {
     constructor() {
@@ -16,7 +18,7 @@ export class News extends Component {
 
         }
         else {
-            let url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=5ff6fce93b3442cbba407ba2f99076d9&page=1&pageSize=20";
+            let url = URL;
             let data = await fetch(url);
             let parsedData = await data.json();
             this.setState({
